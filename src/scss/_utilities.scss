@@ -1,0 +1,40 @@
+.btn {
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    transition: all 0.2s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 15rem;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    &:active {
+        opacity: 1;
+    }
+
+    &--primary {
+        background-color: $primary;
+    }
+
+    &--secondary {
+        background-color: $secondary;
+    }
+
+    &--delete {
+        background-color: $white;
+        color: $primary;
+        margin-left: 3rem;
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+.controls {
+    display: flex;
+    align-items: flex-end;
+}

@@ -1,0 +1,63 @@
+$black: #010302;
+$gray: #333333;
+$white: #fdfcfa;
+$primary: #662e9b;
+$secondary: #43bccd;
+$shadow: 0 0.5rem 1rem rgba(154, 160, 185, 0.05),
+    0 1.5rem 4rem rgba(166, 173, 201, 0.2);
+
+$bp-medium: 78em;
+$bp-small: 44em;
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+
+    @media only screen and (max-width: $bp-medium) {
+        font-size: 56%;
+    }
+}
+
+body {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.6rem;
+    color: $black;
+    background-color: $white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 115rem;
+    margin: 0 auto;
+    min-height: 100vh;
+
+    @media only screen and (max-width: $bp-medium) {
+        width: 90%;
+    }
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 6rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 1.5rem 0 3rem;
+}

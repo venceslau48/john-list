@@ -1,0 +1,87 @@
+.task {
+    padding: 1rem;
+    transition: all 0.4s;
+    cursor: pointer;
+
+    &:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &:hover {
+        transform: translateX(0.5rem);
+    }
+
+    &__name {
+        border-radius: 0.5rem;
+        padding: inherit;
+        border: 1px solid $primary;
+        color: $black;
+        font-size: 1.8rem;
+
+        &--completed {
+            text-decoration: line-through;
+        }
+    }
+
+    &__delete {
+        color: $secondary;
+        margin-left: 1.5rem;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    transition: all 0.4s;
+    margin: 6rem 0;
+    width: 50rem;
+
+    @media only screen and (max-width: $bp-small) {
+        width: 90%;
+        margin: 6rem auto;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+
+        &:not(:last-child) {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    &__label {
+        font-size: 1.8rem;
+        color: $gray;
+        margin-bottom: 1.2rem;
+    }
+
+    &__input {
+        border-radius: 0.5rem;
+        padding: 1.2rem 0.8rem;
+        font-size: 1.6rem;
+        color: $black;
+        border: 0.14rem solid rgba(0, 0, 0, 0.1);
+        outline: none;
+
+        &:focus,
+        &:active {
+            border: 0.14rem solid $secondary;
+        }
+    }
+}
+
+.oops {
+    margin: 6rem 0;
+
+    &__img {
+        height: 30rem;
+    }
+
+    &__msg {
+        margin-top: 3rem;
+        font-size: 2rem;
+        color: $gray;
+    }
+}
