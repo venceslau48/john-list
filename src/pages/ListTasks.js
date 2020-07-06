@@ -1,41 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { TasksContext } from "../global/TasksContext";
-import FlexContainer from "../components/FlexContainer";
+import FlexColumn from "../components/FlexColumn";
+import FlexRow from "../components/FlexRow";
 import Task from "../components/Task";
-import Oops from "../components/Oops";
+import Msg from "../components/Msg";
+import Form from "../components/Form";
 
 const ListTasks = () => {
-    const [tasks, setTasks] = useContext(TasksContext);
-    const [task, setTask] = useState("");
-
-    //UPDATE
-    const completeTask = taskId => {
-        const task = tasks.find(task => task.id === taskId);
-        const index = tasks.indexOf(task);
-        const updatedTask = { ...task, completed: true };
-        tasks[index] = updatedTask;
-
-        setTasks(tasks.map(task => (task.id === taskId ? updatedTask : task)));
-    };
-
-    //DELETE
-    const deleteTask = taskId => {
-        setTasks(tasks.filter(task => task.id !== taskId));
-    };
-
-    //ADD
-    const onSubmit = e => {
-        e.preventDefault();
-
-        setTasks([
-            ...tasks,
-            {
-                id: Math.floor(Math.random() * 100 + 1),
-                name: task,
-                completed: false
-            }
-        ]);
-    };
+    const { tasks, setTasks } = useContext(TasksContext);
+    const { task, setTask } = useContext(TasksContext);
+    const { completeTask, deleteTask, addTask } = useContext(TasksContext);
 
     //LOCAL STORAGE GET
     useEffect(() => {
@@ -51,36 +25,66 @@ const ListTasks = () => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks, task]);
 
+    //CLEAR ALL TASKS
+    const clearAll = () => {
+        localStorage.clear();
+        window.location.reload();
+    };
+
+    //CLEAR COMPLETED TASKS
+    const clearCompleted = () => {
+        const tasksCompleted = JSON.parse(localStorage.getItem("tasks"));
+        const updatedTasks = tasksCompleted.filter(
+            task => task.completed === false
+        );
+
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        window.location.reload();
+    };
+
     return (
         <>
             <h2>Lista de tarefas</h2>
-            {console.log(tasks)}
-            <form className="form" onSubmit={onSubmit}>
-                <div className="form__group">
-                    <label className="form__label">Tarefa</label>
-                    <input
-                        className="form__input"
-                        type="text"
-                        value={task}
-                        onChange={e => setTask(e.target.value)}
-                        required
-                    />
-                </div>
-                <button className="btn btn--secondary">Adicionar</button>
-            </form>
+            <Form
+                onSubmit={addTask}
+                value={task}
+                onChange={e => setTask(e.target.value)}
+            />
             {tasks.length > 0 ? (
-                <FlexContainer>
-                    {tasks.map(task => (
-                        <Task
-                            task={task}
-                            key={task.id}
-                            completeTask={() => completeTask(task.id)}
-                            deleteTask={() => deleteTask(task.id)}
-                        />
-                    ))}
-                </FlexContainer>
+                <>
+                    <Msg>
+                        {`Tens ${tasks.length} ${
+                            tasks.length > 1 ? "tarefas" : "tarefa"
+                        } por completar`}
+                    </Msg>
+                    <FlexColumn>
+                        <FlexRow>
+                            <button
+                                className="btn btn--primary"
+                                onClick={clearAll}
+                                style={{ marginRight: 20 }}
+                            >
+                                Limpar tudo
+                            </button>
+                            <button
+                                className="btn btn--primary"
+                                onClick={clearCompleted}
+                            >
+                                Limpar completas
+                            </button>
+                        </FlexRow>
+                        {tasks.map(task => (
+                            <Task
+                                task={task}
+                                key={task.id}
+                                completeTask={() => completeTask(task.id)}
+                                deleteTask={() => deleteTask(task.id)}
+                            />
+                        ))}
+                    </FlexColumn>
+                </>
             ) : (
-                <Oops>Não existem tarefas!</Oops>
+                <Msg>Não tens tarefas pendentes!</Msg>
             )}
         </>
     );

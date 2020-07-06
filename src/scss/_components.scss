@@ -1,5 +1,4 @@
 .task {
-    padding: 1rem;
     transition: all 0.4s;
     cursor: pointer;
 
@@ -13,10 +12,11 @@
 
     &__name {
         border-radius: 0.5rem;
-        padding: inherit;
+        padding: 1rem;
         border: 1px solid $primary;
         color: $black;
         font-size: 1.8rem;
+        display: inline-block;
 
         &--completed {
             text-decoration: line-through;
@@ -24,7 +24,8 @@
     }
 
     &__delete {
-        color: $secondary;
+        color: $primary;
+        font-size: 2rem;
         margin-left: 1.5rem;
     }
 }
@@ -38,7 +39,7 @@
     width: 50rem;
 
     @media only screen and (max-width: $bp-small) {
-        width: 90%;
+        width: 100%;
         margin: 6rem auto;
     }
 
@@ -64,22 +65,34 @@
         color: $black;
         border: 0.14rem solid rgba(0, 0, 0, 0.1);
         outline: none;
+        flex: 0 0 90%;
+
+        @media only screen and (max-width: $bp-small) {
+            flex: 0 0 85%;
+        }
 
         &:focus,
         &:active {
             border: 0.14rem solid $secondary;
         }
+
+        &--aux {
+            display: flex;
+            width: 100%;
+
+            .btn {
+                flex: 1;
+                margin-left: 1rem;
+                font-size: 2rem;
+            }
+        }
     }
 }
 
-.oops {
-    margin: 6rem 0;
+.msg {
+    margin: 3rem 0;
 
-    &__img {
-        height: 30rem;
-    }
-
-    &__msg {
+    &__text {
         margin-top: 3rem;
         font-size: 2rem;
         color: $gray;
