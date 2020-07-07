@@ -6,4 +6,4 @@
 
 Simple CRUD app made with React/hooks, Context API, Local Storage and SCSS.
 
-Developed by John Vences - copyright @ 2020
+Developed by [John Vences](https://github.com/venceslau48) - copyright @ 2020
