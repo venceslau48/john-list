@@ -5,3 +5,5 @@
 ![Thumbnail](thumbnail.png)
 
 Simple CRUD app made with React/hooks, Context API, Local Storage and SCSS.
+
+Developed by John Vences - copyright @ 2020
